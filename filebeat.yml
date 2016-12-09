@@ -17,7 +17,7 @@ filebeat.prospectors:
 
 - input_type: log
   paths:
-    - /home/hidepin/apachelog/web01.log*
+    - /home/hidepin/log/web01/access_log*
   fields:
     server: web01
 
@@ -25,7 +25,7 @@ filebeat.prospectors:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - /home/hidepin/apachelog/web02.log*
+    - /home/hidepin/log/web02/access_log*
     #- /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
   fields:

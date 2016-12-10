@@ -18,8 +18,7 @@ filebeat.prospectors:
 - input_type: log
   paths:
     - /home/hidepin/log/web01/access_log*
-  fields:
-    server: web01
+  document_type: web01
 
 - input_type: log
 
@@ -28,8 +27,7 @@ filebeat.prospectors:
     - /home/hidepin/log/web02/access_log*
     #- /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
-  fields:
-    server: web02
+  document_type: web01
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.

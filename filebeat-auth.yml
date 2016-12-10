@@ -1,0 +1,10 @@
+filebeat.prospectors:
+
+- input_type: log
+  paths:
+    - /home/hidepin/log/auth/auth.log
+  fields:
+    server: auth
+
+output.logstash:
+  hosts: ["localhost:5042"]

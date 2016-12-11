@@ -1,12 +1,5 @@
 {
     "book" : {
-        "_index" : {
-            "enabled" : true
-        },
-        "_id" : {
-            "index": "not_analyzed",
-            "store" : "yes"
-        },
         "properties" : {
             "author" : {
                 "type" : "string"

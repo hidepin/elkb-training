@@ -1,0 +1,17 @@
+{
+  "description": "_description",
+  "processors": [
+    {
+      "grok" : {
+        "field": "message",
+        "patterns": ["%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource} <%{WORD:facility}.%{WORD:priority}> %{SYSLOGPROG}:%{WORD:result} password for( invalid user)? %{USERNAME:username} from %{IPORHOST:source_host}.*"]
+      }
+    },
+    {
+      "date" : {
+        "field" : "timestamp",
+        "formats" : ["MMM  d HH:mm:ss", "MMM dd HH:mm:ss"]
+      }
+    }
+  ]
+}

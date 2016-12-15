@@ -1,0 +1,13 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /var/log/secure*
+  document_type: secure
+
+  include_lines: ["Accepted password for", "Failed password for"]
+
+  exclude_files: [".gz$"]
+
+output.elasticsearch:
+  hosts: ["xxx.xxx.xxx.xxx:9200"]
+  pipeline: auth_pipeline

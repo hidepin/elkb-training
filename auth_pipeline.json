@@ -8,7 +8,8 @@
           "RESULT" : "Accepted password|Accepted keyboard-interactive/pam|Failed password|Failed keyboard-interactive/pam|Received disconnect|Connection closed|Connection reset|Invalid user|fatal: Unable to negotiate|Bad protocol version identification|Did not receive identification string"
         },
         "patterns": [
-          "%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource}(?: <%{WORD:facility}.%{WORD:priority}>)? %{SYSLOGPROG}:(?: )?(?:%{RESULT:result}(?: for)?(?: invalid user)?(?: %{USERNAME:username})?(?: '[^']+')? (?:from|by|with) %{IPORHOST:source_host})?.*"          ],
+          "%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource}(?: <%{WORD:facility}.%{WORD:priority}>)? %{SYSLOGPROG}:(?: )?(?:%{RESULT:result}(?: for)?(?: invalid user)?(?: %{USERNAME:username})?(?: '[^']+')? (?:from|by|with) %{IPORHOST:source_host})?.*"
+        ],
         "on_failure" : [
           {
             "set" : {

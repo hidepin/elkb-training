@@ -18,26 +18,26 @@
             }
           }
         ]
-      },
-      {
-        "geoip" : {
-          "field" : "source_host",
-          "ignore_failure" : true
-        }
-      },
-      {
-        "date" : {
-          "field" : "timestamp",
-          "formats" : ["MMM  d HH:mm:ss", "MMM dd HH:mm:ss"],
-          "timezone" : "Asia/Tokyo"
-        }
-      },
-      {
-        "date_index_name": {
-          "field": "@timestamp",
-          "index_name_prefix": "secure-",
-          "date_rounding": "d"
-        }
+      }
+    },
+    {
+      "geoip" : {
+        "field" : "source_host",
+        "ignore_failure" : true
+      }
+    },
+    {
+      "date" : {
+        "field" : "timestamp",
+        "formats" : ["MMM  d HH:mm:ss", "MMM dd HH:mm:ss"],
+        "timezone" : "Asia/Tokyo"
+      }
+    },
+    {
+      "date_index_name": {
+        "field": "@timestamp",
+        "index_name_prefix": "secure-",
+        "date_rounding": "d"
       }
     }
   ]

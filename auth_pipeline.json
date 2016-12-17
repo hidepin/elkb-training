@@ -4,7 +4,9 @@
     {
       "grok" : {
         "field": "message",
-        "patterns": ["%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource} <%{WORD:facility}.%{WORD:priority}> %{SYSLOGPROG}:%{WORD:result} password for( invalid user)? %{USERNAME:username} from %{IPORHOST:source_host}.*"]
+          "patterns": [
+              "%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource}(?: <%{WORD:facility}.%{WORD:priority}>)? %{SYSLOGPROG}:(?: )?%{WORD:result} password for( invalid user)? %{USERNAME:username} from %{IPORHOST:source_host}.*"
+          ]
       }
     },
     {

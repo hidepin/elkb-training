@@ -2,12 +2,25 @@ filebeat.prospectors:
 - input_type: log
   paths:
     - /var/log/secure*
+    - /var/log/auth*
   document_type: secure
 
-  include_lines: ["Accepted password for", "Failed password for"]
+  include_lines: [
+    "Accepted password",
+    "Accepted keyboard-interactive/pam",
+    "Failed password",
+    "Failed keyboard-interactive/pam",
+    "Received disconnect",
+    "Connection closed",
+    "Connection reset",
+    "Invalid user",
+    "fatal: Unable to negotiate",
+    "Bad protocol version identification",
+    "Did not receive identification string"
+  ]
 
-  exclude_files: [".gz$"]
+  exclude_files: [ ".gz$", "bz2$" ]
 
 output.elasticsearch:
-  hosts: ["xxx.xxx.xxx.xxx:9200"]
+  hosts: [ "xxx.xxx.xxx.xxx:9200" ]
   pipeline: auth_pipeline

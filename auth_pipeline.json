@@ -4,24 +4,40 @@
     {
       "grok" : {
         "field": "message",
-          "patterns": [
-              "%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource}(?: <%{WORD:facility}.%{WORD:priority}>)? %{SYSLOGPROG}:(?: )?%{WORD:result} password for( invalid user)? %{USERNAME:username} from %{IPORHOST:source_host}.*"
-          ]
+        "pattern_definitions" : {
+          "RESULT" : "Accepted password|Accepted keyboard-interactive/pam|Failed password|Failed keyboard-interactive/pam|Received disconnect|Connection closed|Connection reset|Invalid user|fatal: Unable to negotiate|Bad protocol version identification|Did not receive identification string"
+        },
+        "patterns": [
+          "%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:logsource}(?: <%{WORD:facility}.%{WORD:priority}>)? %{SYSLOGPROG}:(?: )?(?:%{RESULT:result}(?: for)?(?: invalid user)?(?: %{USERNAME:username})?(?: '[^']+')? (?:from|by|with) %{IPORHOST:source_host})?.*"          ],
+        "on_failure" : [
+          {
+            "set" : {
+              "field" : "error",
+              "value" : "{{ _ingest.on_failure_message }}"
+            }
+          }
+        ]
+      },
+      {
+        "geoip" : {
+          "field" : "source_host",
+          "ignore_failure" : true
+        }
+      },
+      {
+        "date" : {
+          "field" : "timestamp",
+          "formats" : ["MMM  d HH:mm:ss", "MMM dd HH:mm:ss"],
+          "timezone" : "Asia/Tokyo"
+        }
+      },
+      {
+        "date_index_name": {
+          "field": "@timestamp",
+          "index_name_prefix": "secure-",
+          "date_rounding": "d"
+        }
       }
-    },
-    {
-      "date" : {
-        "field" : "timestamp",
-        "formats" : ["MMM  d HH:mm:ss", "MMM dd HH:mm:ss"],
-        "timezone" : "Asia/Tokyo"
-      }
-    },
-    {
-       "date_index_name": {
-         "field": "@timestamp",
-         "index_name_prefix": "secure-",
-         "date_rounding": "d"
-       }
     }
   ]
 }

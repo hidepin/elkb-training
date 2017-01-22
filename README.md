@@ -1,5 +1,11 @@
 # elkb-training
 
+### 参考情報
+
+- logstash grok
+
+  /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-patterns-core-4.0.2/patterns/grok-patterns
+
 
 ### rpmでlogstashをインストールし、一般ユーザでlogstashを動作させる手順
 

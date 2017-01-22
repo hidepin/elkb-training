@@ -1,0 +1,14 @@
+filebeat.prospectors:
+
+- input_type: log
+  paths:
+    - ../log/*.log
+  document_type: iis
+  exclude_lines: ["^#"]
+
+output.logstash:
+  # Boolean flag to enable or disable the output module.
+  enabled: true
+
+  # The Logstash hosts
+  hosts: ["localhost:5044"]

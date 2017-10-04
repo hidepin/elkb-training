@@ -1,0 +1,48 @@
+{
+    "description": "gatling",
+    "processors": [
+        {
+            "grok" : {
+                "field": "message",
+                "patterns": [
+                    "%{NOTSPACE:METHOD}\t*%{NOTSPACE:simulator}\t*%{NOTSPACE:userid}\t*%{NOTSPACE:view}\t*%{NOTSPACE:starttime}\t*%{NOTSPACE:endtime}\t*%{NOTSPACE:result}"
+                ],
+                "on_failure" : [
+                    {
+                        "set" : {
+                            "field" : "error",
+                            "value" : "{{ _ingest.on_failure_message }}"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "convert": {
+                "field" : "starttime",
+                "type": "integer"
+            }
+        },
+        {
+            "convert": {
+                "field" : "endtime",
+                "type": "integer"
+            }
+        },
+        {
+            "date" : {
+                "field" : "starttime",
+                "formats" : ["UNIX_MS"],
+                "timezone" : "Asia/Tokyo"
+            }
+        },
+        {
+            "date_index_name" : {
+                "field" : "@timestamp",
+                "index_name_prefix" : "gatling-",
+                "index_name_format" : "yyyy.MM.dd",
+                "date_rounding" : "d"
+            }
+        }
+    ]
+}

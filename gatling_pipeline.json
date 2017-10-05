@@ -18,15 +18,17 @@
             }
         },
         {
-            "convert": {
-                "field" : "starttime",
-                "type": "integer"
+            "grok": {
+                "field": "source",
+                "patterns": [
+                    ".*/gatling-charts-highcharts-bundle-2.3.0/%{NOTSPACE:target_host}/.*"
+                    ]
             }
         },
         {
-            "convert": {
-                "field" : "endtime",
-                "type": "integer"
+            "script": {
+                "lang" : "painless",
+                "source": "ctx.duration = (Long.parseLong(ctx.endtime) - Long.parseLong(ctx.starttime))"
             }
         },
         {

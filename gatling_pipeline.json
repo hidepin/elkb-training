@@ -21,7 +21,7 @@
             "grok": {
                 "field": "source",
                 "patterns": [
-                    ".*/gatling-charts-highcharts-bundle-2.3.0/%{NOTSPACE:target_host}/.*"
+                    ".*/gatling-charts-highcharts-bundle[^/]*/(?<target_host>[^/]*)/.*"
                     ]
             }
         },
